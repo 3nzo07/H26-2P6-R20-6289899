@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -45,6 +46,11 @@ namespace Models
             set
             {
                 m_dateAssemblage = value;
+                DateTime now = DateTime.Now;
+                if (DateVente > now)
+                {
+                    throw new ArgumentOutOfRangeException("La date de vente ne peut pas être dans le futur.");
+                }
             }
 
         }
@@ -55,13 +61,46 @@ namespace Models
             set
             {
                 m_nomOrdinateur = value.Trim();
+                if(string.IsNullOrEmpty(NomOrdinateur))
+                {
+                    throw new ArgumentException("Le nom de l'ordinateur ne peut pas être vide.");
+                }
             }
         }
 
         public List<Composante> ListeComposantes
         {
-            get;
-            private set;
+            get { return new List<Composante>(); }
+            private set
+            {
+                if(ListeComposantes == null)
+                {
+                    throw new ArgumentException("La composante ne peut pas être nulle!");
+                }
+            }
+        }
+
+
+        public TimeSpan JoursGarantieRestants
+        {
+            get
+            {
+                DateTime FinGarantie = DateVente.AddDays(JOURS_GARANTIE);
+                return FinGarantie - DateTime.Now;
+            }
+            
+        }
+
+        public int CapaciteAtteint
+        {
+            get { return CapaciteAtteint; }
+            private set
+            {
+                if (value > MAX_WATT)
+                {
+                    throw new InvalidOperationException("Impossible d'ajouter une composante : l'ordinateur a atteint sa capacité maximale!");
+                }
+            }
         }
 
 
