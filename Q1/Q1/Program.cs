@@ -23,8 +23,24 @@ namespace Q1
         /// </summary>
         static void ToDo2()
         {                    
+            //Ordinateur Msi = new Ordinateur("Modern B15m", new DateTime(2023,24,12));
+            
+            
 
-           
+            try
+            {
+                
+                Ordinateur windows = new Ordinateur("", new DateTime(2026, 04, 15));
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+
+            try
+            {
+                Ordinateur Linux = new Ordinateur("Linux", new DateTime(2026, 04, 13));
+                Linux.
+            }
         }
     }
 }

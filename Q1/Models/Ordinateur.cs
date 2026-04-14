@@ -96,6 +96,11 @@ namespace Models
             get { return CapaciteAtteint; }
             private set
             {
+                int wattadd;
+                foreach(Composante c in ListeComposantes)
+                {
+                     
+                }
                 if (value > MAX_WATT)
                 {
                     throw new InvalidOperationException("Impossible d'ajouter une composante : l'ordinateur a atteint sa capacité maximale!");
